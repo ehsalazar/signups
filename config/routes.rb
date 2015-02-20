@@ -5,8 +5,6 @@ Rails.application.routes.draw do
 
   delete "delete_session", to: "sessions#destroy", as: "delete_session"
 
-  get 'login', to: 'users#login', as: "login"
-
   root 'home#index'
 
 
