@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    self.clearbit
     if @user.save
       session[:user_id] = @user.id
       redirect_to user_path(@user)
@@ -15,12 +16,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def company_info
-    @user = User.find(params[:id])
+  def clearbit
+    Clearbit.key = ENV['CLEARBIT_KEY']
     domain = "#{@user.company_name}.com"
-    api = Clearbit::Client.new
-    @info = api.get_company_info(domain)
-    render partial: "info"
+    company = Clearbit::Streaming::Company[domain: domain]
+    puts company
   end
 
   private
