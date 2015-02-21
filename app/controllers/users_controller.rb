@@ -15,6 +15,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def company_info
+    @user = User.find(params[:id])
+    domain = "#{@user.company_name}.com"
+    api = Clearbit::Client.new
+    @info = api.get_company_info(domain)
+    render partial: "info"
+  end
+
   private
 
   def user_params
