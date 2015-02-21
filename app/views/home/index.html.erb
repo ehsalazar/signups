@@ -5,7 +5,7 @@
     <h3>Sign up for a trial memberhsip.</h3>
     <div id="signupForm">
       <%= form_for @user, {action: "create"} do |f| %>
-      <%= f.text_field :user_name, required: true, placeholder: "NAME" %>
+      <%= f.text_field :name, required: true, placeholder: "NAME" %>
       <br>
       <%= f.text_field :email, required: true, type: "email", pattern: "[^@]+@[^@]+\.[a-zA-Z]{2,6}", placeholder: "E-MAIL" %>
       <br>

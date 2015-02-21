@@ -1,6 +1,6 @@
 <% if logged_in? %>
   <div class="container">
-    <h3>Welcome Back, <%= @user.user_name %> <span style='float: right'><%= link_to "Logout", delete_session_path, method: :delete %></span></h3>
+    <h3>Welcome Back, <%= @user.name %> <span style='float: right'><%= link_to "Logout", delete_session_path, method: :delete %></span></h3>
 
     <h4>The information we have on record is: </h4>
     <p>Email: <%= @user.email %></p>
