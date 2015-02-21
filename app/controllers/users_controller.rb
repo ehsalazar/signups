@@ -20,7 +20,6 @@ class UsersController < ApplicationController
     Clearbit.key = ENV['CLEARBIT_KEY']
     domain = "#{@user.company_name}.com"
     company = Clearbit::Streaming::Company[domain: domain]
-    # puts company
   end
 
   def company_builder
