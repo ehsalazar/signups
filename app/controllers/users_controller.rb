@@ -3,9 +3,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    self.clearbit
     if @user.save
       session[:user_id] = @user.id
+      self.company_builder
       redirect_to user_path(@user)
     else
       redirect_to :back
@@ -20,8 +20,14 @@ class UsersController < ApplicationController
     Clearbit.key = ENV['CLEARBIT_KEY']
     domain = "#{@user.company_name}.com"
     company = Clearbit::Streaming::Company[domain: domain]
-    puts company
+    # puts company
   end
+
+  def company_builder
+    @company = Company.create(name: @user.company_name, metadata: self.clearbit)
+    @company.users << @user
+  end
+
 
   private
 
