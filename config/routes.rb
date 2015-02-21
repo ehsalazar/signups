@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :users
+  resources :companies, only: [:create]
   resources :sessions, only: [:create, :destroy]
 
   delete "delete_session", to: "sessions#destroy", as: "delete_session"
