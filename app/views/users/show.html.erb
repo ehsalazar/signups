@@ -1,12 +1,16 @@
-<header>
+<% if logged_in? %>
   <div class="container">
-    <nav>
-      <ul>
-        <li>Welcome Back</li>
-        <% if logged_in? %>
-          <li><%= link_to "Logout", delete_session_path, method: :delete %></li>
-        <% end %>
-      </ul>
-    </nav>
-  </div>
-</header>
+    <h3>Welcome Back, <%= @user.user_name %> <span style='float: right'><%= link_to "Logout", delete_session_path, method: :delete %></span></h3>
+
+    <h4>The information we have on record is: </h4>
+    <p>Email: <%= @user.email %></p>
+    <p>Company: <%= @user.company_name %></p>
+    <p>Phone: <%= @user.phone_number %></p>
+
+    <h4>We'll contact you soon to active your trial membership!</h4>
+  <div>
+<% else %>
+  <center>
+    <h1>Please <%= link_to "log in", root_path %> to continue!</h1>
+  </center>
+<% end %>
