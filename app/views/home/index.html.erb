@@ -1,7 +1,8 @@
 <center>
   <div class="cotainer">
+    <h1>Welcome to SignUps!</h1>
     <!-- Create Account Form -->
-    <h3>Sign up for a trial memberhsip!</h3>
+    <h3>Sign up for a trial memberhsip.</h3>
     <div id="signupForm">
       <%= form_for @user, {action: "create"} do |f| %>
       <%= f.text_field :user_name, required: true, placeholder: "NAME" %>
@@ -18,7 +19,7 @@
       <% end %>
     </div>
     <!-- Login form -->
-    <h3>Returning members, please sign in!</h3>
+    <h3>Returning members, please sign in.</h3>
     <div id="loginForm">
       <%= form_for :users, url: {controller: "sessions", action: "create"} do |f| %>
       <%= f.text_field :email, required: true, type: "email", pattern: "[^@]+@[^@]+\.[a-zA-Z]{2,6}", placeholder: "E-MAIL" %>
