@@ -37,6 +37,9 @@ gem 'bcrypt', '~> 3.1.10'
 
 gem 'clearbit'
 
+gem 'databasedotcom'
+gem 'databasedotcom-rails'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
