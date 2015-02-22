@@ -1,0 +1,8 @@
+host: login.salesforce.com
+client_secret: 7506506551260366492
+sobject_moduel: SFDC_Models
+debbuging: true
+# username: ehsalazar@me.com
+# password: envoy2015RvHmBzYxIYUb9wU9DHYBNKB1
+username: ehsalazar%2Bsfapi@me.com
+password: envoy2015o3Zom5Uo8jaJXTjnRGoC1lzQw
