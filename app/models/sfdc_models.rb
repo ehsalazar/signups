@@ -4,7 +4,7 @@ module SFDC_Models
 
   def populate_salesforce(name)
     client = Databasedotcom::Client.new
-    client.authenticate :username => 'ehsalazar+sfapi@me.com', :password => 'envoy2015o3Zom5Uo8jaJXTjnRGoC1lzQw'
+    client.authenticate :username => ENV['SALESFORCE_USERNAME'], :password => ENV['SALESFORCE_PASSWORD']
     client.sobject_module = 'SFDC_Models'
     client.materialize('Account')
     dummy = Account.new
@@ -13,3 +13,6 @@ module SFDC_Models
     dummy.save
   end
 end
+
+
+#Salesforce fields: account name, type: prospect, annual revenue, phone, fax, website, ticker symbol, employees, ownership, billing street, billing city, billing state, billing postal code, billing country, description
