@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   def company_builder
     @company = Company.create(name: @user.company_name, metadata: self.clearbit)
     @company.users << @user
-    self.populate_salesforce(@company.metadata['legal_name'])
+    self.populate_salesforce(@company)
   end
 
 
