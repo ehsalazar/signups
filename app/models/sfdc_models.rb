@@ -10,8 +10,9 @@ module SFDC_Models
     account = Account.new(Name: company.metadata['legal_name'], OwnerId: '005j000000BnwumAAB', Phone: company.users.first.phone_number, BillingCity: company.metadata['geo']['city'], BillingState: company.metadata['geo']['state'], BillingCountry: company.metadata['geo']['country'], NumberOfEmployees: company.metadata['employees'], Description: company.metadata['description'], Website: company.metadata['url'], Type: 'prospect')
     account_id = account.save
     client.materialize('Contact')
-    contact = Contact.new(AccountId: account_id, OwnerId: '005j000000BnwumAAB', LastName: company.users.first.name, Phone: company.users.first.phone_number, Email: company.users.first.email, MailingCity: company.metadata['geo']['city'], MailingState: company.metadata['geo']['state'], MailingCountry: company.metadata['geo']['country'])
-    contact.save
+    Contact.create(AccountId: account_id, OwnerId: '005j000000BnwumAAB', LastName: company.users.first.name, Phone: company.users.first.phone_number, Email: company.users.first.email, MailingCity: company.metadata['geo']['city'], MailingState: company.metadata['geo']['state'], MailingCountry: company.metadata['geo']['country'])
+    client.materialize('Opportunity')
+    Opportunity.create(AccountId: account_id, OwnerId: '005j000000BnwumAAB', Name: 'Trial', Type: 'New Customer', CloseDate: Date.today.advance(months: 3), StageName: 'Prospecting')
   end
 end
 
@@ -38,4 +39,9 @@ end
 # contact.MailingCountry = company.metadata['geo']['country']
 
 # Needed to populate Opportunity
-
+# opportunity.AccountId = account_id
+# opportunity.OwnerId = '005j000000BnwumAAB'
+# opportunity.Name = 'Trial'
+# opportunity.Type = 'New Customer'
+# opportunity.CloseDate = Date.today.advance(months: 3)
+# opportunity.StageName = 'Prospecting'
