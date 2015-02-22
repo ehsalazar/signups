@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   include SessionsHelper
+  include SFDC_Models
 
   def create
     @user = User.new(user_params)
@@ -25,6 +26,7 @@ class UsersController < ApplicationController
   def company_builder
     @company = Company.create(name: @user.company_name, metadata: self.clearbit)
     @company.users << @user
+    self.populate_salesforce(@company.metadata['legal_name'])
   end
 
 
