@@ -7,18 +7,35 @@ module SFDC_Models
     client.authenticate :username => ENV['SALESFORCE_USERNAME'], :password => ENV['SALESFORCE_PASSWORD']
     client.sobject_module = 'SFDC_Models'
     client.materialize('Account')
-    dummy = Account.new(Name: company.metadata['legal_name'], OwnerId: '005j000000BnwumAAB', Phone: company.users.first.phone_number, BillingCity: company.metadata['geo']['city'], BillingState: company.metadata['geo']['state'], BillingCountry: company.metadata['geo']['country'], NumberOfEmployees: company.metadata['employees'], Description: company.metadata['description'], Website: company.metadata['url'], Type: 'prospect')
-    account_id = dummy.save
+    account = Account.new(Name: company.metadata['legal_name'], OwnerId: '005j000000BnwumAAB', Phone: company.users.first.phone_number, BillingCity: company.metadata['geo']['city'], BillingState: company.metadata['geo']['state'], BillingCountry: company.metadata['geo']['country'], NumberOfEmployees: company.metadata['employees'], Description: company.metadata['description'], Website: company.metadata['url'], Type: 'prospect')
+    account_id = account.save
+    client.materialize('Contact')
+    contact = Contact.new(AccountId: account_id, OwnerId: '005j000000BnwumAAB', LastName: company.users.first.name, Phone: company.users.first.phone_number, Email: company.users.first.email, MailingCity: company.metadata['geo']['city'], MailingState: company.metadata['geo']['state'], MailingCountry: company.metadata['geo']['country'])
+    contact.save
   end
 end
 
-# yahoo.Name = company.metadata['legal_name']
-# yahoo.OwnerId = '005j000000BnwumAAB'
-# yahoo.Phone = company.users.first.phone_number
-# yahoo.BillingCity = company.metadata['geo']['city']
-# yahoo.BillingState = company.metadata['geo']['state']
-# yahoo.BillingCountry = company.metadata['geo']['country']
-# yahoo.NumberOfEmployees = company.metadata['employees']
-# yahoo.Description = company.metadata['description']
-# yahoo.Website = company.metadata['url']
-# yahoo.Type = 'prospect'
+# Needed to populate Account
+# account.Name = company.metadata['legal_name']
+# account.OwnerId = '005j000000BnwumAAB'
+# account.Phone = company.users.first.phone_number
+# account.BillingCity = company.metadata['geo']['city']
+# account.BillingState = company.metadata['geo']['state']
+# account.BillingCountry = company.metadata['geo']['country']
+# account.NumberOfEmployees = company.metadata['employees']
+# account.Description = company.metadata['description']
+# account.Website = company.metadata['url']
+# account.Type = 'prospect'
+
+# Needed to populate Contact
+# contact.AccountId = account_id
+# contact.OwnerId = '005j000000BnwumAAB'
+# contact.LastName = company.users.first.name
+# contact.Phone = company.users.first.phone_number
+# contact.Email = company.users.first.email
+# contact.MailingCity = company.metadata['geo']['city']
+# contact.MailingState = company.metadata['geo']['state']
+# contact.MailingCountry = company.metadata['geo']['country']
+
+# Needed to populate Opportunity
+
