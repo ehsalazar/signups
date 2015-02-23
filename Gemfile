@@ -40,8 +40,10 @@ gem 'clearbit'
 gem 'databasedotcom'
 gem 'databasedotcom-rails'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+group :production do
+  gem 'unicorn'
+  gem 'rails_12factor'
+end
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
