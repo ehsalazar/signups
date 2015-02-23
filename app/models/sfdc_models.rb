@@ -15,14 +15,16 @@ module SFDC_Models
       Type: 'prospect'
     }
 
-    if company.metadata != nil
+    if company.metadata != nil && !( company.metadata.empty? )
+      if company.metadata.has_key?('legal_name') && company.metadata['legal_name'] != nil && company.metadata['legal_name'] != ''
+        account_details['Name'] = company.metadata['legal_name']
+      end
       account_details.update(
-        Name: company.metadata['legal_name'],
         NumberOfEmployees: company.metadata['employees'],
         Website: company.metadata['url'],
         Description: company.metadata['description']
       )
-      if company.metadata.has_key? 'geo' && company.metadata['geo'] != nil
+      if company.metadata.has_key?('geo') && company.metadata['geo'] != nil
         account_details.update(
           BillingCity: company.metadata['geo']['city'],
           BillingState: company.metadata['geo']['state'],
@@ -31,8 +33,22 @@ module SFDC_Models
       end
     end
 
-    account = Account.new(account_details)
-    account_id = account.save
+#    account = Account.new(account_details)
+#    account_id = account.save
+
+    account = Account.find_by_Name("#{account_details['Name']}")
+    # Interpolate because Salesforce requires literal search string
+    # (databasedotcom incorrectly tries a bind variable; see
+    #  stackoverflow.com/questions/26078967)
+    if account == nil
+      account = Account.new(account_details)
+      account_id = account.save
+    else
+      account.update_attributes(account_details)
+      #Will not work on a new record due to automatic save included in update_attribute.
+      account_id = account['Id']
+    end
+
     client.materialize('Contact')
 
     contact_details = {
