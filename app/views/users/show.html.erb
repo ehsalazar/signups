@@ -2,12 +2,12 @@
   <div class="container">
     <h3>Welcome Back, <%= @user.name %> <span style='float: right'><%= link_to "Logout", delete_session_path, method: :delete %></span></h3>
 
-    <h4>The information we have on record is: </h4>
+    <h4>The information you entered is: </h4>
     <p>Email: <%= @user.email %></p>
     <p>Company: <%= @user.company_name %></p>
     <p>Phone: <%= @user.phone_number %></p>
 
-    <h4>We'll contact you soon to active your trial membership!</h4>
+    <h4>We'll contact you soon to activate your trial membership!</h4>
   <div>
 <% else %>
   <center>
