@@ -9,21 +9,26 @@ module SFDC_Models
     client.materialize('Account')
 
     account_details = {
-      Name: company.metadata['legal_name'],
       OwnerId: '005j000000BnwumAAB',
       Phone: company.users.first.phone_number,
-      NumberOfEmployees: company.metadata['employees'],
-      Description: company.metadata['description'],
-      Website: company.metadata['url'],
+      Name: company.users.first.company_name, #Will be used only if not legal name is returned from Clearbit
       Type: 'prospect'
     }
 
-    if company.metadata.has_key? 'geo' && company.metadata['geo'] != nil
+    if company.metadata != nil
       account_details.update(
-        BillingCity: company.metadata['geo']['city'],
-        BillingState: company.metadata['geo']['state'],
-        BillingCountry: company.metadata['geo']['country']
+        Name: company.metadata['legal_name'],
+        NumberOfEmployees: company.metadata['employees'],
+        Website: company.metadata['url'],
+        Description: company.metadata['description']
       )
+      if company.metadata.has_key? 'geo' && company.metadata['geo'] != nil
+        account_details.update(
+          BillingCity: company.metadata['geo']['city'],
+          BillingState: company.metadata['geo']['state'],
+          BillingCountry: company.metadata['geo']['country']
+        )
+      end
     end
 
     account = Account.new(account_details)
@@ -35,10 +40,10 @@ module SFDC_Models
       OwnerId: '005j000000BnwumAAB',
       LastName: company.users.first.name,
       Phone: company.users.first.phone_number,
-      Email: company.users.first.email,
+      Email: company.users.first.email
     }
 
-    if company.metadata.has_key? 'geo' && company.metadata['geo'] != nil
+    if company.metadata != nil && company.metadata.has_key?('geo') && company.metadata['geo'] != nil
       contact_details.update(
         MailingCity: company.metadata['geo']['city'],
         MailingState: company.metadata['geo']['state'],
