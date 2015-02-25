@@ -9,6 +9,7 @@ class UsersController < ApplicationController
       self.company_builder
       redirect_to user_path(@user)
     else
+      flash[:error] = @user.errors.full_messages
       redirect_to :back
     end
   end
