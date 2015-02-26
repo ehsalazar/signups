@@ -24,9 +24,9 @@ App Features
 
 Future Directions
 -------------------
-- Create a background worker using Sidekiq to execute the calls to Clearbit and Salesforce once the user object is created in postgresql. (This would allow a faster, tentative response to the user.)
-- ~~Add additional levels of data validation such as uniqueness of email, and password length.~~
-- Prevent duplicate Contact objects from being created in Salesforce. (I have already implemented this for Account objects, and the steps would be similar.)
-- Add more robust error handling around api calls.
-- Create custom Salesforce fields to store additional Clearbit metadata such as company logo and social media links.
-- Add more front-end features such as styling and options such as type-ahead smart fields.
+- [ ] Create a background worker using Sidekiq to execute the calls to Clearbit and Salesforce once the user object is created in postgresql. (This would allow a faster, tentative response to the user.)
+- [x] Add additional levels of data validation such as uniqueness of email, and password length.~~
+- [ ] Prevent duplicate Contact objects from being created in Salesforce. (I have already implemented this for Account objects, and the steps would be similar.)
+- [ ] Add more robust error handling around api calls.
+- [ ] Create custom Salesforce fields to store additional Clearbit metadata such as company logo and social media links.
+- [ ] Add more front-end features such as styling and options such as type-ahead smart fields.
