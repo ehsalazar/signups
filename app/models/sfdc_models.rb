@@ -11,7 +11,7 @@ module SFDC_Models
     account_details = {
       OwnerId: '005j000000BnwumAAB',
       Phone: company.users.first.phone_number,
-      Name: company.users.first.company_name, #Will be used only if not legal name is returned from Clearbit
+      Name: company.users.first.company_name, #Will be used only if no legal name is returned from Clearbit
       Type: 'prospect'
     }
 
@@ -45,7 +45,7 @@ module SFDC_Models
       account_id = account.save
     else
       account.update_attributes(account_details)
-      #Will not work on a new record due to automatic save included in update_attribute.
+    # Will not work on a new record due to automatic save included in update_attribute.
       account_id = account['Id']
     end
 
