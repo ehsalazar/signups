@@ -9,6 +9,7 @@ Utilized the following project specific gems:
 - `gem 'clearbit'`
 - `gem 'databasedotcom'`
 - `gem 'bcrypt'`
+- `gem 'sidekiq'`
 
 As well as the following for deployment to Heroku:
 - `gem 'unicorn'`
@@ -24,7 +25,7 @@ App Features
 
 Future Directions
 -------------------
-- [ ] Create a background worker using Sidekiq to execute the calls to Clearbit and Salesforce once the user object is created in postgresql. (This would allow a faster, tentative response to the user.)
+- [x] Create a background worker using Sidekiq to execute the calls to Clearbit and Salesforce once the user object is created in postgresql. (This would allow a faster, tentative response to the user.)
 - [ ] Add additional levels of data validation such as uniqueness of email, and password length.
  - [x] Validation for presence of user and company name.
  - [x] Validation for presence and uniqueness of user email.
