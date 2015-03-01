@@ -40,6 +40,9 @@ gem 'clearbit'
 gem 'databasedotcom'
 gem 'databasedotcom-rails'
 
+gem 'sidekiq'
+
+
 group :production do
   gem 'unicorn'
   gem 'rails_12factor'
